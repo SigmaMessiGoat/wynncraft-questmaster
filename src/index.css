@@ -1,0 +1,234 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink-950: #0b0907;
+  --color-ink-900: #131009;
+  --color-ink-850: #1a150d;
+  --color-ink-800: #221b10;
+  --color-ink-700: #2f2617;
+  --color-ink-600: #453720;
+
+  --color-gold-50: #fdf4dc;
+  --color-gold-200: #f3dd9d;
+  --color-gold-400: #e3b654;
+  --color-gold-500: #cf9b2e;
+  --color-gold-600: #a97a1d;
+  --color-gold-700: #7d5a14;
+
+  --color-parch-50: #f4e9cf;
+  --color-parch-100: #e8d9b4;
+  --color-parch-200: #d8c495;
+  --color-parch-400: #b09a66;
+  --color-parch-600: #7a6637;
+
+  --color-blood-500: #a3312a;
+  --color-blood-600: #7e241f;
+
+  --color-moss-500: #6d9c3f;
+  --color-moss-600: #4f7529;
+
+  --color-mana-500: #4a90b8;
+
+  --font-display: "Cinzel", "Times New Roman", serif;
+  --font-body: "EB Garamond", Georgia, serif;
+  --font-pixel: "Press Start 2P", "Courier New", monospace;
+}
+
+@layer base {
+  html {
+    scrollbar-color: var(--color-gold-700) var(--color-ink-950);
+  }
+  body {
+    background-color: var(--color-ink-950);
+    background-image:
+      radial-gradient(ellipse at 50% -10%, rgba(207, 155, 46, 0.09), transparent 55%),
+      repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.012) 0px,
+        rgba(255, 255, 255, 0.012) 2px,
+        transparent 2px,
+        transparent 7px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.25) 0px,
+        rgba(0, 0, 0, 0.25) 3px,
+        transparent 3px,
+        transparent 9px
+      );
+    color: var(--color-parch-100);
+    font-family: var(--font-body);
+    min-height: 100vh;
+  }
+  ::selection {
+    background: var(--color-gold-600);
+    color: var(--color-ink-950);
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+  }
+  input, textarea, select, button {
+    font-family: inherit;
+  }
+  input:focus-visible, textarea:focus-visible, select:focus-visible, button:focus-visible {
+    outline: 2px solid var(--color-gold-500);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Ornate framed panel — the base of every RPG container */
+  .panel {
+    position: relative;
+    background:
+      linear-gradient(180deg, rgba(47, 38, 23, 0.55), rgba(11, 9, 7, 0.85)),
+      var(--color-ink-900);
+    border: 1px solid var(--color-ink-600);
+    box-shadow:
+      inset 0 0 0 1px rgba(207, 155, 46, 0.14),
+      inset 0 1px 0 rgba(243, 221, 157, 0.07),
+      0 12px 30px rgba(0, 0, 0, 0.55);
+  }
+  .panel::before,
+  .panel::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 1px solid var(--color-gold-600);
+    opacity: 0.75;
+    pointer-events: none;
+  }
+  .panel::before {
+    top: 4px;
+    left: 4px;
+    border-right: 0;
+    border-bottom: 0;
+  }
+  .panel::after {
+    bottom: 4px;
+    right: 4px;
+    border-left: 0;
+    border-top: 0;
+  }
+
+  /* Parchment sheet for quest-log / grimoire content */
+  .parchment {
+    background:
+      radial-gradient(circle at 20% 15%, rgba(255, 255, 255, 0.35), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(122, 102, 55, 0.25), transparent 50%),
+      linear-gradient(150deg, var(--color-parch-50), var(--color-parch-100) 55%, var(--color-parch-200));
+    color: #33291a;
+    box-shadow:
+      inset 0 0 60px rgba(122, 102, 55, 0.35),
+      0 14px 34px rgba(0, 0, 0, 0.6);
+  }
+
+  .btn-rpg {
+    font-family: var(--font-display);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: linear-gradient(180deg, var(--color-gold-500), var(--color-gold-700));
+    color: #1c1405;
+    border: 1px solid var(--color-gold-200);
+    box-shadow: 0 3px 0 #5c4110, 0 8px 18px rgba(0, 0, 0, 0.5);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+  }
+  .btn-rpg:hover {
+    filter: brightness(1.12);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 0 #5c4110, 0 10px 22px rgba(0, 0, 0, 0.55);
+  }
+  .btn-rpg:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #5c4110, 0 4px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .btn-ghost {
+    font-family: var(--font-display);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(11, 9, 7, 0.7);
+    color: var(--color-gold-200);
+    border: 1px solid var(--color-ink-600);
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  }
+  .btn-ghost:hover {
+    border-color: var(--color-gold-600);
+    color: var(--color-gold-400);
+    background: rgba(207, 155, 46, 0.08);
+  }
+
+  .field {
+    background: rgba(11, 9, 7, 0.85);
+    border: 1px solid var(--color-ink-600);
+    color: var(--color-parch-50);
+    padding: 0.55rem 0.75rem;
+    width: 100%;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .field::placeholder {
+    color: rgba(216, 196, 149, 0.35);
+  }
+  .field:focus {
+    border-color: var(--color-gold-600);
+    box-shadow: 0 0 0 3px rgba(207, 155, 46, 0.15);
+    outline: none;
+  }
+
+  /* Ornate divider: —— ✦ —— */
+  .rule-ornate {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--color-gold-600);
+  }
+  .rule-ornate::before,
+  .rule-ornate::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, currentColor, transparent);
+  }
+}
+
+@layer utilities {
+  .text-shadow-gold {
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.85), 0 0 18px rgba(207, 155, 46, 0.35);
+  }
+  .text-shadow-ink {
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+  }
+  .pixel {
+    font-family: var(--font-pixel);
+  }
+}
+
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  /* Hide the whole dark app; show only the printable sheet. */
+  body * {
+    visibility: hidden !important;
+  }
+  .print-sheet,
+  .print-sheet * {
+    visibility: visible !important;
+  }
+  .print-sheet {
+    display: block !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: none !important;
+    border: 0 !important;
+    background: #fff !important;
+    page-break-inside: avoid;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
